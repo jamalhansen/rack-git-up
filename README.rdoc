@@ -1,6 +1,6 @@
 = rack-git-up
 
-Description goes here.
+A simple Rack based utility similar to Rack Static to pull a file from a git repo, write it out to a specified location and serve it.
 
 == Note on Patches/Pull Requests
  

@@ -1,0 +1,3 @@
+[submodule "test/test-repo"]
+	path = test/test-repo
+	url = git://github.com/rubyyot/rack-git-up-test-repo.git
