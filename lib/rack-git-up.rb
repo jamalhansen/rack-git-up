@@ -21,11 +21,12 @@ module Rack
         result = @file_server.call(env)
         return result if result[0] == 200
       end
+      
       @app.call(env)
     end
 
     def pull_from_git path
-      blob = (@repo.tree/path[1..-1])
+      blob = (@repo.tree/path[1..-1])   #remove leading slash
       f = ::File.new(::File.join(@root, path), "w")
       f.syswrite(blob.data)
       f.close

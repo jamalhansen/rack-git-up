@@ -17,7 +17,7 @@ class GitUpTest < Test::Unit::TestCase
 
     should "should allow regular requests to follow through" do
       app = git_up :root => @root, :repo => @repo, :urls => @urls
-      status, headers, body = app.call mock_env
+      status, headers, body = app.call(mock_env('/README'))
       assert_equal 200, status
       
       out = ''
@@ -25,7 +25,18 @@ class GitUpTest < Test::Unit::TestCase
       
       assert_equal "This is a test repo for using the rack-git-up gem\n", out
     end
-
+    
+    should "should filter based on url" do
+      app = git_up :root => @root, :repo => @repo, :urls => ["/wonki wonki donki/*.jpg"]
+      status, headers, body = app.call(mock_env('/README'))
+      assert_equal 404, status
+    end
+    
+    should "should return 404 if file does not exist" do 
+      app = git_up :root => @root, :repo => @repo, :urls => ["/wonki wonki donki/*.jpg"]
+      status, headers, body = app.call(mock_env('/cannot_readme_because_i_do_not_exist'))
+      assert_equal 404, status
+    end
   end
   
     
@@ -42,7 +53,7 @@ class GitUpTest < Test::Unit::TestCase
     end
   end
   
-  def mock_env path = '/README'
+  def mock_env path = '/'
     Rack::MockRequest.env_for path
   end
 
