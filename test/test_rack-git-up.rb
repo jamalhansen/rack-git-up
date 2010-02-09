@@ -26,7 +26,7 @@ class GitUpTest < Test::Unit::TestCase
       assert_equal "This is a test repo for using the rack-git-up gem\n", out
     end
     
-    should "should filter based on url" do
+    should "should filter based on urls" do
       app = git_up :root => @root, :repo => @repo, :urls => ["/wonki wonki donki/*.jpg"]
       status, headers, body = app.call(mock_env('/README'))
       assert_equal 404, status
