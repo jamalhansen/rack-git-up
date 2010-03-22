@@ -25,6 +25,7 @@ Gem::Specification.new do |s|
      "Rakefile",
      "VERSION",
      "lib/rack-git-up.rb",
+     "rack-git-up.gemspec",
      "test/helper.rb",
      "test/test_rack-git-up.rb"
   ]
